@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportadora Transcarapiá</title>
+    <meta name="description" content="Há décadas conectando empresas e destinos com agilidade, segurança e eficiência no transporte rodoviário de cargas.">
+    <link rel="icon" type="image/png" href="./logo2%20.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="./chat.css">
+
+    <style>
+        /* Variáveis Globais e Paleta (Azul Corporativo + Vermelho de Destaque) */
+        :root {
+            --navy-deep: #0A1118;
+            --navy-corporate: #101E2E;
+            --red-primary: #D92525;
+            --red-hover: #B51D1D;
+            --white: #FFFFFF;
+            --light-gray: #F4F6F8;
+            --gray-text: #64748B;
+            --border-color: #E2E8F0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            color: var(--navy-deep);
+            background-color: var(--white);
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--red-primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(217, 37, 37, 0.35);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 37, 37, 0.45);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Header & Navegação */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: transparent;
+            padding: 12px 0;
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 17, 24, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-fallback {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+
+        .header-actions {
+            position: relative;
+            z-index: 1002;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-toggle {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 40px;
+            padding: 4px;
+            border: 0;
+            border-radius: 6px;
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .language-toggle:hover,
+        .language-toggle:focus-visible {
+            background: var(--light-gray);
+            outline: 2px solid var(--red-primary);
+            outline-offset: 2px;
+        }
+
+        .language-toggle img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 28px;
+            object-fit: contain;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            z-index: 1003;
+            display: none;
+            min-width: 160px;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            background: var(--navy-corporate);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-switcher.open .language-menu {
+            display: flex;
+        }
+
+        .language-option {
+            width: 100%;
+            padding: 10px 12px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--white);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .language-option:hover,
+        .language-option[aria-pressed="true"] {
+            background: rgba(217, 37, 37, 0.25);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(12px, 1.4vw, 20px);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--white);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--red-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(10, 17, 24, 0.75), rgba(10, 17, 24, 0.90)), url('Foto Hero.jpeg') no-repeat center center/cover;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: var(--white);
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-indicators {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .indicator-item h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .indicator-item p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        /* Seção Diferenciais */
+        .features {
+            font-family: 'Montserrat', sans-serif;
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--red-primary);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--navy-deep);
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            font-family: 'Inter', sans-serif;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 40px 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(10, 17, 24, 0.08);
+            border-color: var(--red-primary);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background-color: rgba(217, 37, 37, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red-primary);
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--navy-deep);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        /* Sobre Nós */
+        .about {
+            font-family: 'Montserrat', sans-serif;
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--navy-deep);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .about-highlight {
+            display: flex;
+            gap: 20px;
+            margin-top: 32px;
+            padding: 24px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            border-left: 4px solid var(--red-primary);
+        }
+
+        .highlight-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--red-primary);
+            line-height: 1;
+        }
+
+        .highlight-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 4px;
+        }
+
+        .highlight-text p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--gray-text);
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(10, 17, 24, 0.12);
+        }
+
+        /* Missão, Visão e Valores */
+        .mvv {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .mvv-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .mvv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(10, 17, 24, 0.06);
+            border-color: var(--red-primary);
+        }
+
+        .mvv-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--red-primary);
+            color: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .mvv-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 12px;
+        }
+
+        .mvv-card p {
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        /* Serviços e Frota */
+        .services {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background-color: var(--light-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(10, 17, 24, 0.08);
+            border-color: var(--red-primary);
+        }
+
+        .service-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .service-body {
+            padding: 24px;
+        }
+
+        .service-body h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 8px;
+        }
+
+        .service-body p {
+            font-size: 0.9rem;
+            color: var(--gray-text);
+            line-height: 1.5;
+        }
+
+        .services-cta {
+            background: #666666;
+            border-radius: 16px;
+            padding: 48px;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            border-top: 4px solid var(--red-primary);
+        }
+
+        .services-cta-text h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .services-cta-text p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* Rotas atendidas */
+        .routes {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .route-card {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            padding: 28px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background-color: var(--white);
+            transition: var(--transition);
+        }
+
+        .route-card:hover {
+            border-color: var(--red-primary);
+            box-shadow: 0 12px 30px rgba(10, 17, 24, 0.08);
+        }
+
+        .route-card-wide {
+            grid-column: 1 / -1;
+        }
+
+        .route-card-heading {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .route-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--red-primary);
+            color: var(--white);
+        }
+
+        .route-card-heading h3 {
+            color: var(--navy-deep);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .route-areas-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .route-area {
+            min-width: 0;
+            padding: 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--light-gray);
+        }
+
+        .route-area-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .route-area h4 {
+            color: var(--navy-deep);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .route-badge {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 9px;
+            border-radius: 999px;
+            background-color: rgba(217, 37, 37, 0.1);
+            color: var(--red-primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .route-area p {
+            color: var(--gray-text);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .route-area p + p {
+            margin-top: 8px;
+        }
+
+        .route-city-groups {
+            display: grid;
+            gap: 9px;
+            margin-top: 12px;
+        }
+
+        .route-city-groups li {
+            color: var(--gray-text);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .route-city-groups strong {
+            color: var(--navy-deep);
+        }
+
+        .route-place-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 12px;
+        }
+
+        .route-place-list li {
+            padding: 5px 9px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background-color: var(--white);
+            color: var(--gray-text);
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .route-note {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem !important;
+        }
+
+        .route-card-footer {
+            margin-top: auto;
+        }
+
+        .route-card-footer .btn {
+            gap: 10px;
+        }
+
+        /* Seção Segurança */
+        .security {
+            padding: 100px 0;
+            background-color: #666666;
+            color: var(--white);
+            position: relative;
+        }
+
+        .security .section-header h2 {
+            color: var(--white);
+        }
+
+        .security .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .security-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 36px 28px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .security-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--red-primary);
+            transform: translateY(-4px);
+        }
+
+        .security-icon {
+            color: var(--red-primary);
+            margin-bottom: 20px;
+        }
+
+        .security-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .security-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+        }
+
+        /* Regiões e Contatos */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(10, 17, 24, 0.03);
+        }
+
+        .contact-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--navy-deep);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 16px;
+        }
+
+        .phone-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .phone-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--navy-corporate);
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: var(--light-gray);
+        }
+
+        .phone-item:hover {
+            background-color: rgba(217, 37, 37, 0.1);
+            color: var(--red-primary);
+            padding-left: 16px;
+        }
+
+        .phone-item i {
+            font-size: 1.1rem;
+            color: var(--red-primary);
+        }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            background-color: var(--light-gray);
+            color: var(--navy-corporate);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            transition: var(--transition);
+        }
+
+        .location-item:hover {
+            background-color: rgba(217, 37, 37, 0.1);
+            color: var(--red-primary);
+        }
+
+        .location-item > i {
+            flex: 0 0 18px;
+            margin-top: 2px;
+            color: var(--red-primary);
+        }
+
+        .location-map-label {
+            display: block;
+            margin-top: 3px;
+            color: var(--red-primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .contact-banner-action {
+            text-align: center;
+            background-color: var(--white);
+            padding: 50px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-banner-action h3 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--navy-deep);
+            margin-bottom: 12px;
+        }
+
+        .contact-banner-action p {
+            color: var(--gray-text);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 100px 0;
+            background-color: #666666;
+            color: var(--white);
+            text-align: center;
+            border-top: 4px solid var(--red-primary);
+        }
+
+        .cta-final-content {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .cta-final h2 {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .cta-final p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #808080;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 80px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-col p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--red-primary);
+            padding-left: 6px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--red-primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .about-grid, .services-cta, .footer-grid, .mvv-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .routes-grid {
+                grid-template-columns: 1fr;
+            }
+            .route-card-wide {
+                grid-column: auto;
+            }
+            .services-cta {
+                text-align: center;
+                flex-direction: column;
+            }
+            .hero-indicators {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: var(--navy-deep);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                transition: var(--transition);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                z-index: 1001;
+            }
+            .nav-menu.active {
+                right: 0;
+            }
+            .menu-toggle {
+                display: block;
+                z-index: 1002;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .routes {
+                padding: 72px 0;
+            }
+            .route-card {
+                padding: 20px;
+            }
+            .route-areas-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navegação -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="./logo.PNG" alt="Transcarapiá Transportes" onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='block';">
+                <span id="logoFallback" class="logo-fallback" style="display: none;">TRANSCARAPIÁ</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio" class="nav-link active">Início</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#rotas" class="nav-link">Nossas Rotas</a></li>
+                    <li><a href="#seguranca" class="nav-link">Segurança</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                    <li><a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Solicitar orçamento</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-switcher" id="languageSwitcher">
+                    <button class="language-toggle" id="languageToggle" type="button" aria-label="Abrir seletor de idiomas" aria-expanded="false" aria-controls="languageMenu">
+                        <img src="./logo.PNG" alt="">
+                    </button>
+                    <div class="language-menu" id="languageMenu" role="group" aria-label="Opções de idioma">
+                        <button class="language-option" type="button" data-language="pt-BR" aria-pressed="true">Português</button>
+                        <button class="language-option" type="button" data-language="en" aria-pressed="false">English</button>
+                        <button class="language-option" type="button" data-language="es" aria-pressed="false">Español</button>
+                    </div>
+                </div>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Chegando antes do que você imagina.</h1>
+                <p>Há décadas conectando empresas e destinos com agilidade, segurança e eficiência no transporte de cargas.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#contato" class="btn btn-primary">
+                        Rastreamento de cargas <i data-lucide="arrow-right" size="18"></i>
+                    </a>
+                    <a href="#sobre" class="btn btn-outline">
+                        Conheça nossa operação
+                    </a>
+                </div>
+
+                <div class="hero-indicators">
+                    <div class="indicator-item">
+                        <h4>Tradição e Rigor</h4>
+                        <p>Atuação sólida desde 1995</p>
+                    </div>
+                    <div class="indicator-item">
+                        <h4>Frota Adequada</h4>
+                        <p>Utilitários a pesados</p>
+                    </div>
+                    <div class="indicator-item">
+                        <h4>Monitoramento 24h</h4>
+                        <p>Acompanhamento via satélite</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Diferenciais -->
+    <section class="features" id="diferenciais">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Diferenciais</span>
+                <h2>Logística pensada para ir além.</h2>
+                <p>Mais do que transportar cargas, trabalhamos para entregar confiança, previsibilidade e eficiência em cada operação.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="zap" size="26"></i></div>
+                    <h3>Agilidade nas entregas</h3>
+                    <p>Operações planejadas para conectar origens e destinos com eficiência e pontualidade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="shield-check" size="26"></i></div>
+                    <h3>Segurança operacional</h3>
+                    <p>Monitoramento da frota e gestão de riscos para proteger cada etapa do transporte.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="cpu" size="26"></i></div>
+                    <h3>Tecnologia e rastreamento</h3>
+                    <p>Monitoramento via satélite da frota, 24 horas por dia, conforme as diretrizes institucionais.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i data-lucide="users" size="26"></i></div>
+                    <h3>Compromisso com o cliente</h3>
+                    <p>Atendimento próximo, flexibilidade operacional e foco nas necessidades de cada empresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre a Transcarapiá -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag">Institucional</span>
+                    <h2>Experiência que move negócios.</h2>
+                    <p>A Transcarapiá Transportes Ltda. foi fundada em <strong>31 de outubro de 1995</strong>, a partir da união de experiência, conhecimento e vontade de oferecer um serviço de transporte de cargas com excelência.</p>
+                    <p>Ao longo de sua trajetória, a empresa ampliou sua atuação, desenvolveu sua estrutura operacional e construiu relacionamentos duraderos com clientes e parceiros em todo o território nacional.</p>
+                    <p>Nosso compromisso contínuo é oferecer soluções logísticas com agilidade, segurança, flexibilidade e eficiência, valorizando as pessoas envolvidas em cada etapa da operação.</p>
+                    
+                    <div class="about-highlight">
+                        <div class="highlight-number">1995</div>
+                        <div class="highlight-text">
+                            <h4>Fundação Oficial</h4>
+                            <p>Décadas de solidez, dedicação e compromisso com o transporte rodoviário de cargas no Brasil.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="./estoque.jpeg" alt="Operação logística Transcarapiá">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missão, Visão e Valores -->
+    <section class="mvv">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Diretrizes Organizacionais</span>
+                <h2>Nossos Princípios</h2>
+                <p>Os pilares que guiam nossa cultura corporativa e nosso compromisso diário com o mercado.</p>
+            </div>
+
+            <div class="mvv-grid">
+                <div class="mvv-card">
+                    <div class="mvv-icon"><i data-lucide="target" size="24"></i></div>
+                    <h3>Missão</h3>
+                    <p>Desenvolver uma logística de ponta, superando as expectativas de nossos clientes e oferecendo soluções inovadoras ao mercado.</p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-icon"><i data-lucide="eye" size="24"></i></div>
+                    <h3>Visão</h3>
+                    <p>Ser líder no segmento de transporte, gerando confiança por meio da constante capacitação técnica, humana e administrativa.</p>
+                </div>
+                <div class="mvv-card">
+                    <div class="mvv-icon"><i data-lucide="heart" size="24"></i></div>
+                    <h3>Valores</h3>
+                    <p>Valorizamos o espírito colaborativo, o desenvolvimento das pessoas e a construção de um ambiente de trabalho comprometido com a qualidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços e Soluções Logísticas -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portfólio de Veículos</span>
+                <h2>Soluções para diferentes necessidades de transporte.</h2>
+                <p>Contamos com uma estrutura diversificada para atender cargas de pequeno, médio e grande porte com máxima eficiência.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="./Imagem%20tratada%20-%20SITE.webp" alt="Armazém logístico Transcarapiá" class="service-img">
+                    <div class="service-body">
+                        <h3>Transporte de Cargas Pesadas
+
+</h3>
+                        <p>Especialização no transporte de grandes volumes e cargas de alto peso, com segurança e eficiência.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="./Imagem%20tratada%20-%20SITE2.png" alt="Frota de caminhões Transcarapiá" class="service-img">
+                    <div class="service-body">
+                        <h3>Transporte de Cargas Gerais
+
+</h3>
+                        <p>Soluções completas para movimentação de mercadorias e produtos de diferentes segmentos.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="./Imagem%20tratada%20-%20SITE3.webp" alt="Equipe carregando mercadorias em um caminhão" class="service-img">
+                    <div class="service-body">
+                        <h3>Transporte de Longa Distância
+
+</h3>
+                        <p>Conectamos diferentes regiões com pontualidade, planejamento e compromisso com cada entrega.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="./Imagem%20tratada%20-%20SITE4.webp" alt="Equipe realizando carga e descarga de mercadorias" class="service-img">
+                    <div class="service-body">
+                        <h3>Logística e Distribuição
+
+</h3>
+                        <p>Organização e gerenciamento de operações para garantir entregas eficientes e bem planejadas.
+
+</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="./Imagem%20tratada%20-%20SITE5.png" alt="Caminhões da frota Transcarapiá no pátio" class="service-img">
+                    <div class="service-body">
+                        <h3>Transporte Especializado
+
+</h3>
+                        <p>Atendimento personalizado para operações de transporte que exigem planejamento e atenção especial.
+
+</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services-cta" id="frota">
+                <div class="services-cta-text">
+                    <h3>Precisa de uma solução para sua operação?</h3>
+                    <p>Nossa equipe está pronta para avaliar a modalidade de transporte ideal para o seu negócio.</p>
+                </div>
+                <button type="button" class="btn btn-primary" id="openSalesChat" aria-controls="salesChat" aria-expanded="false">
+                    Converse com nossa equipe <i data-lucide="message-square" size="18"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nossas Rotas -->
+    <section class="routes" id="rotas">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Atendimento Regional</span>
+                <h2>Nossas Rotas</h2>
+                <p>A Transcarapiá atua em todo o estado do Rio de Janeiro e na Grande São Paulo, prezando sempre pela qualidade, eficiência e rapidez nas entregas. Ao todo, são mais de 100 cidades atendidas na Região Sudeste! Consulte-nos para saber mais sobre os prazos de entrega e cargas transportadas.</p>
+            </div>
+
+            <div class="routes-grid">
+                <article class="route-card route-card-wide">
+                    <div class="route-card-heading">
+                        <div class="route-icon"><i data-lucide="map-pin" size="24" aria-hidden="true"></i></div>
+                        <h3>Rio de Janeiro e Grande Rio</h3>
+                    </div>
+
+                    <div class="route-areas-grid">
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Rio de Janeiro (Município)</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 48h</span>
+                            </div>
+                            <p>Prazo de entrega: até 48 horas (1 a 2 dias) — consultar área Comercial.</p>
+                            <ul class="route-place-list">
+                                <li>Zona Norte</li>
+                                <li>Zona Sul</li>
+                                <li>Zona Oeste</li>
+                            </ul>
+                        </div>
+
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Grande Rio</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 72h</span>
+                            </div>
+                            <p>Prazo de entrega: até 72 horas (1 a 3 dias).</p>
+                            <ul class="route-city-groups">
+                                <li><strong>Duque de Caxias:</strong> Jardim Primavera, Campos Elíseos, Capivari, Saracuruna, Imbariê, Santa Cruz da Serra, Xerém e Figueira.</li>
+                                <li><strong>Nova Iguaçu:</strong> Mesquita, Queimados, Miguel Couto, Vila de Cava, Adrianópolis, Santa Luzia, Japeri, Engenheiro Pedreira, etc.</li>
+                                <li><strong>São João de Meriti:</strong> São Mateus, Tomazinho, Éden, Agostinho Porto, Vilar dos Teles e Vila Rosali.</li>
+                                <li><strong>Belford Roxo:</strong> Bairros.</li>
+                                <li><strong>Nilópolis:</strong> Bairros.</li>
+                                <li><strong>Niterói:</strong> São Gonçalo, Neves, Alcântara e Tribobó.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="route-card-footer">
+                        <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                            Pedir Orçamento <i data-lucide="arrow-right" size="18" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="route-card route-card-wide">
+                    <div class="route-card-heading">
+                        <div class="route-icon"><i data-lucide="map" size="24" aria-hidden="true"></i></div>
+                        <h3>Rio de Janeiro (Interior e Região dos Lagos)</h3>
+                    </div>
+
+                    <div class="route-areas-grid">
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Interior</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 4 dias</span>
+                            </div>
+                            <ul class="route-place-list">
+                                <li>Magé</li><li>Piabetá</li><li>Mauá</li><li>Surui</li><li>Guapimirim</li>
+                                <li>Inhomirim</li><li>Petrópolis</li><li>Teresópolis</li><li>Friburgo</li>
+                            </ul>
+                        </div>
+
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Região dos Lagos</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 4 dias</span>
+                            </div>
+                            <ul class="route-place-list">
+                                <li>Inoã</li><li>São José do Embassai</li><li>Maricá</li><li>Saquarema</li><li>Bacaxá</li>
+                                <li>Araruama</li><li>Jacone</li><li>Arraial do Cabo</li><li>Iguaba Grande e Pequena</li>
+                                <li>São Pedro D'Aldeia</li><li>Cabo Frio</li><li>Búzios</li><li>Barra de São João</li>
+                                <li>Rio das Ostras</li><li>Macaé</li>
+                            </ul>
+                            <p class="route-note">Outras Praças somente mediante consulta.</p>
+                        </div>
+
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Região Norte Fluminense</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 4 dias</span>
+                            </div>
+                            <ul class="route-place-list">
+                                <li>Campos dos Goytacazes</li><li>Cardoso Moreira</li><li>São Fidélis</li>
+                                <li>São Francisco de Itabapoana</li><li>São João da Barra</li><li>Carapebus</li>
+                                <li>Conceição de Macabu</li><li>Macaé</li>
+                            </ul>
+                            <p class="route-note">Outras Praças somente mediante consulta.</p>
+                        </div>
+
+                        <div class="route-area">
+                            <div class="route-area-heading">
+                                <h4>Região Sul Fluminense</h4>
+                                <span class="route-badge"><i data-lucide="clock-3" size="14" aria-hidden="true"></i> Até 4 dias</span>
+                            </div>
+                            <ul class="route-place-list">
+                                <li>Angra dos Reis</li><li>Barra do Piraí</li><li>Barra Mansa</li><li>Itatiaia</li>
+                                <li>Paraty</li><li>Pinheiral</li><li>Piraí</li><li>Porto Real</li><li>Quatis</li>
+                                <li>Resende</li><li>Rio Claro</li><li>Rio das Flores</li><li>Valença</li>
+                                <li>Volta Redonda</li>
+                            </ul>
+                            <p class="route-note">Outras Praças somente mediante consulta.</p>
+                        </div>
+                    </div>
+
+                    <div class="route-card-footer">
+                        <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                            Pedir Orçamento <i data-lucide="arrow-right" size="18" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="route-card">
+                    <div class="route-card-heading">
+                        <div class="route-icon"><i data-lucide="map-pin" size="24" aria-hidden="true"></i></div>
+                        <h3>São Paulo (Capital)</h3>
+                    </div>
+                    <div class="route-area">
+                        <p><strong>OBS.:</strong> Atendemos outras praças mediante consulta. Consulte, também, nosso setor comercial sobre cargas transportadas.</p>
+                    </div>
+                    <div class="route-card-footer">
+                        <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                            Pedir Orçamento <i data-lucide="arrow-right" size="18" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="route-card">
+                    <div class="route-card-heading">
+                        <div class="route-icon"><i data-lucide="map-pin" size="24" aria-hidden="true"></i></div>
+                        <h3>Santa Catarina</h3>
+                    </div>
+                    <div class="route-area">
+                        <h4>Cidades atendidas</h4>
+                        <ul class="route-place-list">
+                            <li>Navegantes</li><li>Itajaí</li><li>Blumenau</li><li>Gaspar</li>
+                            <li>Balneário Piçarras</li><li>Barra Velha</li><li>Penha</li><li>Araquari</li>
+                            <li>Balneário Camboriú</li><li>Camboriú</li>
+                        </ul>
+                    </div>
+                    <div class="route-card-footer">
+                        <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                            Pedir Orçamento <i data-lucide="arrow-right" size="18" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segurança e Gerenciamento de Riscos -->
+    <section class="security" id="seguranca">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" style="color: #ff6b6b;">Gestão e Prevenção</span>
+                <h2>Segurança em cada quilômetro.</h2>
+                <p>A eficiência logística começa com uma operação responsável. Investimos em tecnologia, monitoramento e gerenciamento de riscos.</p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="security-icon"><i data-lucide="satellite" size="28"></i></div>
+                    <h3>Monitoramento 24h</h3>
+                    <p>Acompanhamento via satélite em tempo integral, garantindo controle total sobre a frota em trânsito.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-icon"><i data-lucide="headphones" size="28"></i></div>
+                    <h3>Comunicação Ativa</h3>
+                    <p>Canais diretos e suporte contínuo para acompanhar cada movimentação logística.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-icon"><i data-lucide="shield-alert" size="28"></i></div>
+                    <h3>Gerenciamento de Riscos</h3>
+                    <p>Protocolos rigorosos e preventivos para proteger a integridade das cargas e dos motoristas.</p>
+                </div>
+                <div class="security-card">
+                    <div class="security-icon"><i data-lucide="file-check" size="28"></i></div>
+                    <h3>Cobertura Securitária</h3>
+                    <p>Garantia e tranquilidade por meio de apólices completas para o transporte rodoviário.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regiões e Contatos -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fale Conosco</span>
+                <h2>Nossas Regionais e Contatos</h2>
+                <p>Entre em contato diretamente com a unidade de atendimento mais próxima da sua empresa.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Rio de Janeiro -->
+                <div class="contact-card">
+                    <h3><i data-lucide="map-pin" size="20" style="color: var(--red-primary);"></i> Rio de Janeiro</h3>
+                    <div class="phone-list">
+                        <a href="tel:+552125614388" class="phone-item"><i data-lucide="phone" size="16"></i> (21) 2561-4388</a>
+                        <a href="tel:+552125615304" class="phone-item"><i data-lucide="phone" size="16"></i> (21) 2561-5304</a>
+                        <a href="tel:+552125902554" class="phone-item"><i data-lucide="phone" size="16"></i> (21) 2590-2554</a>
+                        <a href="tel:+552122095911" class="phone-item"><i data-lucide="phone" size="16"></i> (21) 2209-5911</a>
+                    </div>
+                    <a class="location-item" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20OL%2C%203%20-%20200%2C%20no%20Parque%20Duque%2C%20Duque%20de%20Caxias%20-%20RJ" target="_blank" rel="noopener noreferrer" aria-label="Abrir localização do Rio de Janeiro no Google Maps">
+                        <i data-lucide="map-pin" size="18" aria-hidden="true"></i>
+                        <span>Av. OL, 3 - 200, no Parque Duque, Duque de Caxias - RJ<span class="location-map-label">Ver no Google Maps</span></span>
+                    </a>
+                </div>
+
+                <!-- São Paulo -->
+                <div class="contact-card">
+                    <h3><i data-lucide="map-pin" size="20" style="color: var(--red-primary);"></i> São Paulo</h3>
+                    <div class="phone-list">
+                        <a href="tel:+551124128215" class="phone-item"><i data-lucide="phone" size="16"></i> (11) 2412-8215</a>
+                        <a href="tel:+551124461303" class="phone-item"><i data-lucide="phone" size="16"></i> (11) 2446-1303</a>
+                    </div>
+                    <a class="location-item" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Serra%20Branca%2C%20420%2C%20no%20bairro%20Cumbica%2C%20Guarulhos%20-%20SP" target="_blank" rel="noopener noreferrer" aria-label="Abrir localização de São Paulo no Google Maps">
+                        <i data-lucide="map-pin" size="18" aria-hidden="true"></i>
+                        <span>Av. Serra Branca, 420, no bairro Cumbica, Guarulhos - SP<span class="location-map-label">Ver no Google Maps</span></span>
+                    </a>
+                </div>
+
+                <!-- Santa Catarina -->
+                <div class="contact-card">
+                    <h3><i data-lucide="map-pin" size="20" style="color: var(--red-primary);"></i> Santa Catarina</h3>
+                    <div class="phone-list">
+                        <a href="tel:+554732241930" class="phone-item"><i data-lucide="phone" size="16"></i> (47) 3224-1930</a>
+                        <a href="tel:+554732241934" class="phone-item"><i data-lucide="phone" size="16"></i> (47) 3224-1934</a>
+                        <a href="tel:+5547991657272" class="phone-item"><i data-lucide="phone" size="16"></i> (47) 99165-7272</a>
+                    </div>
+                    <a class="location-item" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Edgar%20Negherbon%2C%20101%2C%20Galp%C3%A3o%2C%20bairro%20Machados%2C%20Navegantes%20-%20SC" target="_blank" rel="noopener noreferrer" aria-label="Abrir localização de Santa Catarina no Google Maps">
+                        <i data-lucide="map-pin" size="18" aria-hidden="true"></i>
+                        <span>R. Edgar Negherbon, 101, Galpão, bairro Machados, Navegantes - SC<span class="location-map-label">Ver no Google Maps</span></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-banner-action">
+                <h3>Precisa de uma cotação rápida?</h3>
+                <p>Acesse nosso sistema online de orçamentos e obtenha suporte sob medida para sua operação.</p>
+                <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                    Solicitar orçamento online <i data-lucide="external-link" size="16"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <div class="cta-final-content">
+                <h2>Sua próxima entrega começa com uma boa parceria.</h2>
+                <p>Conte para nós o que sua operação precisa. Nossa equipe está pronta para conversar sobre a melhor solução de transporte para o seu negócio.</p>
+                <div class="cta-buttons">
+                    <a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener" class="btn btn-primary">
+                        Solicitar orçamento gratuito
+                    </a>
+                    <a href="#contato" class="btn btn-outline">
+                        Entrar em contato
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px; display: inline-block;">
+                        <img src="logo.png" alt="Transcarapiá Transportes" style="width: 280px; max-width: 100%; height: auto;">
+                    </a>
+                    <p>Transporte rodoviário de cargas com tradição, segurança e eficiência logística em todo o território nacional desde 1995.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/transcarapia?_rdc=1&_rdr#" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                                <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.5-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.2v3h2.8v8h3.5Z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/transportadoratranscarapia/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="17.5" cy="6.5" r=".75" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </a>
+                        <a href="https://br.linkedin.com/company/transcarapia" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                                <circle cx="4.5" cy="4.5" r="2"/>
+                                <path d="M2.5 8.5h4V21h-4zM9 8.5h3.8v1.7h.1c.5-1 1.8-2 3.7-2 3.9 0 4.6 2.5 4.6 5.7V21h-4v-6.3c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V21H9z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#rotas">Nossas Rotas</a></li>
+                        <li><a href="#seguranca">Segurança</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Soluções</h4>
+                    <ul class="footer-links">
+                        <li><a href="#servicos">Utilitários e Leves</a></li>
+                        <li><a href="#servicos">Veículos Médios</a></li>
+                        <li><a href="#servicos">Semipesados e Pesados</a></li>
+                        <li><a href="https://transcarapia.com.br/orcamento-online/" target="_blank" rel="noopener">Orçamento Online</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Atendimento Regional</h4>
+                    <p><strong>Rio de Janeiro:</strong> (21) 2561-4388</p>
+                    <p><strong>São Paulo:</strong> (11) 2412-8215</p>
+                    <p><strong>Santa Catarina:</strong> (47) 3224-1930</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Transcarapiá Transportes Ltda. Todos os direitos reservados.</p>
+                <p>Desenvolvido por SOA AGENCIA.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="sales-chat" id="salesChat" aria-labelledby="salesChatTitle" aria-hidden="true">
+        <section class="sales-chat__panel" role="dialog" aria-modal="false" aria-labelledby="salesChatTitle">
+            <header class="sales-chat__header">
+                <div class="sales-chat__identity">
+                    <span class="sales-chat__icon" aria-hidden="true"><i data-lucide="headset"></i></span>
+                    <div>
+                        <h2 id="salesChatTitle">Atendimento Transcarapia</h2>
+                        <p>Estamos prontos para atender sua operação.</p>
+                    </div>
+                </div>
+                <div class="sales-chat__controls">
+                    <button class="sales-chat__control" type="button" id="minimizeSalesChat" aria-label="Minimizar chat" title="Minimizar">
+                        <i data-lucide="minus" aria-hidden="true"></i>
+                    </button>
+                    <button class="sales-chat__control" type="button" id="closeSalesChat" aria-label="Fechar chat" title="Fechar">
+                        <i data-lucide="x" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </header>
+            <div class="sales-chat__messages" id="salesChatMessages" aria-live="polite">
+                <div class="sales-chat__welcome">
+                    <p>Olá! Seja bem-vindo à Transcarapia. 🚛</p>
+                    <p>Estamos prontos para ajudar com sua necessidade de transporte. Para que nossa equipe possa entender melhor sua operação, conte um pouco sobre o que você precisa.</p>
+                </div>
+                <p class="sales-chat__form-intro">Preencha os dados abaixo e nossa equipe comercial entrará em contato.</p>
+                <form id="salesRequestForm" class="sales-chat__form" novalidate>
+                    <label class="sales-chat__field">
+                        <span>Nome completo</span>
+                        <input name="name" type="text" autocomplete="name" minlength="2" maxlength="120" required>
+                    </label>
+                    <label class="sales-chat__field">
+                        <span>Nome da empresa</span>
+                        <input name="company" type="text" autocomplete="organization" minlength="2" maxlength="120" required>
+                    </label>
+                    <label class="sales-chat__field">
+                        <span>Telefone/WhatsApp</span>
+                        <input name="phone" type="tel" autocomplete="tel" inputmode="tel" minlength="8" maxlength="24" placeholder="(00) 00000-0000" required>
+                    </label>
+                    <label class="sales-chat__field">
+                        <span>E-mail para contato</span>
+                        <input name="email" type="email" autocomplete="email" maxlength="254" required>
+                    </label>
+                    <div class="sales-chat__field-row">
+                        <label class="sales-chat__field">
+                            <span>Origem (cidade/UF)</span>
+                            <input name="origin" type="text" autocomplete="address-level2" minlength="3" maxlength="120" placeholder="Ex.: São Paulo/SP" required>
+                        </label>
+                        <label class="sales-chat__field">
+                            <span>Destino (cidade/UF)</span>
+                            <input name="destination" type="text" minlength="3" maxlength="120" placeholder="Ex.: Rio de Janeiro/RJ" required>
+                        </label>
+                    </div>
+                    <label class="sales-chat__field">
+                        <span>Tipo de carga ou mercadoria</span>
+                        <input name="cargo" type="text" minlength="2" maxlength="120" required>
+                    </label>
+                    <label class="sales-chat__field">
+                        <span>Peso ou volume aproximado</span>
+                        <input name="quantity" type="text" maxlength="100" placeholder="Ex.: 2 toneladas ou 8 m³" required>
+                    </label>
+                    <label class="sales-chat__field">
+                        <span>Descreva sua necessidade de transporte</span>
+                        <textarea name="details" rows="3" minlength="10" maxlength="2000" required></textarea>
+                    </label>
+                    <div class="sales-chat__trap" aria-hidden="true">
+                        <label>Deixe este campo vazio<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+                    </div>
+                    <p class="sales-chat__error" id="salesChatError" role="alert" hidden></p>
+                    <button class="sales-chat__submit" type="submit">
+                        <span>Enviar solicitação para a Transcarapia</span>
+                        <i data-lucide="send" aria-hidden="true"></i>
+                    </button>
+                    <p class="sales-chat__privacy">Seus dados serão usados somente para atender esta solicitação.</p>
+                </form>
+                <div class="sales-chat__success" id="salesChatSuccess" role="status" hidden>
+                    <span class="sales-chat__success-icon" aria-hidden="true"><i data-lucide="circle-check"></i></span>
+                    <p>Solicitação enviada com sucesso! ✅</p>
+                    <p>Obrigado por entrar em contato com a Transcarapia. Nossa equipe comercial recebeu sua solicitação e entrará em contato o mais breve possível.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <button class="sales-chat-launcher" id="salesChatLauncher" type="button" aria-label="Abrir atendimento Transcarapia" aria-controls="salesChat" aria-expanded="false">
+        <i data-lucide="message-circle" aria-hidden="true"></i>
+        <span>Fale com o nosso time</span>
+    </button>
+
+    <!-- JavaScript Integrado -->
+    <script src="./chat.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Inicializar ícones do Lucide
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // 2. Atualizar o ano atual automaticamente no rodapé
+            const yearElement = document.getElementById('currentYear');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+
+            // 3. Efeito Sticky Header ao rolar a página
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            const languageSwitcher = document.getElementById('languageSwitcher');
+            const languageToggle = document.getElementById('languageToggle');
+
+            if (languageSwitcher && languageToggle) {
+                const languageOptions = languageSwitcher.querySelectorAll('.language-option');
+                const setLanguageMenuOpen = (isOpen) => {
+                    languageSwitcher.classList.toggle('open', isOpen);
+                    languageToggle.setAttribute('aria-expanded', String(isOpen));
+                };
+
+                languageToggle.addEventListener('click', () => {
+                    setLanguageMenuOpen(languageToggle.getAttribute('aria-expanded') !== 'true');
+                });
+
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        languageOptions.forEach(item => {
+                            item.setAttribute('aria-pressed', String(item === option));
+                        });
+                        setLanguageMenuOpen(false);
+                        languageToggle.focus();
+                    });
+                });
+
+                document.addEventListener('click', event => {
+                    if (!languageSwitcher.contains(event.target)) {
+                        setLanguageMenuOpen(false);
+                    }
+                });
+
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape' && languageToggle.getAttribute('aria-expanded') === 'true') {
+                        setLanguageMenuOpen(false);
+                        languageToggle.focus();
+                    }
+                });
+            }
+
+            // 4. Menu Mobile Toggle (Abertura e Fechamento)
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('navMenu');
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    
+                    const icon = menuToggle.querySelector('i');
+                    if (icon) {
+                        const isExpanded = navMenu.classList.contains('active');
+                        icon.setAttribute('data-lucide', isExpanded ? 'x' : 'menu');
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                    }
+                });
+
+                // Fechar menu mobile ao clicar em qualquer link
+                const navLinks = navMenu.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        if (icon) {
+                            icon.setAttribute('data-lucide', 'menu');
+                            if (typeof lucide !== 'undefined') lucide.createIcons();
+                        }
+                    });
+                });
+            }
+
+            // 5. Scroll Suave e Destaque de Link Ativo no Header
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksList = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let scrollY = window.pageYOffset;
+
+                sections.forEach(section => {
+                    const sectionHeight = section.offsetHeight;
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionId = section.getAttribute('id');
+
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        navLinksList.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // 6. Intersection Observer para animações de fade-in ao rolar
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.feature-card, .service-card, .mvv-card, .security-card, .contact-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(25px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
+```[cite: 3]
